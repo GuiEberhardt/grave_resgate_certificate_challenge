@@ -1,0 +1,727 @@
+// Event listener para adicionar tópico
+            $('#addTopico').on('click', function() {
+                adicionarTopico();
+            })<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Evento/Curso - GRAVE</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="logo-placeholder">LOGO GRAVE</div>
+                <span class="ml-2">Certificados Comunitários</span>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="evento.html" class="nav-link active">Criar Evento</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gerador.html" class="nav-link">Gerar Certificados</a>
+                </li>
+                <li class="nav-item">
+                    <a href="templates.html" class="nav-link">Templates</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav class="breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="../index.html">Início</a>
+            </div>
+            <div class="breadcrumb-item active">Criar Evento/Curso</div>
+        </nav>
+    </div>
+
+    <!-- Steps Progress -->
+    <div class="container">
+        <ol class="steps">
+            <li class="step active">
+                <div class="step-number">1</div>
+                <div class="step-title">Crie seu Evento/Curso</div>
+            </li>
+            <li class="step">
+                <div class="step-number">2</div>
+                <div class="step-title">Escolha o Template</div>
+            </li>
+            <li class="step">
+                <div class="step-number">3</div>
+                <div class="step-title">Gere os Certificados</div>
+            </li>
+        </ol>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Configuração do Evento/Curso</h3>
+                        <p class="card-subtitle">
+                            Configure as informações do evento que aparecerão nos certificados
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <form id="eventoForm">
+                            <!-- Informações Básicas -->
+                            <div class="mb-4">
+                                <h5 class="text-primary mb-3">Informações Básicas</h5>
+                                
+                                <div class="form-group">
+                                    <label for="tipoEvento" class="form-label required">Tipo de Evento</label>
+                                    <select id="tipoEvento" name="tipoEvento" class="form-control form-select" required>
+                                        <option value="">Selecione o tipo...</option>
+                                        <option value="workshop">Workshop</option>
+                                        <option value="curso">Curso</option>
+                                        <option value="treinamento">Treinamento</option>
+                                        <option value="capacitacao">Capacitação</option>
+                                        <option value="palestra">Palestra</option>
+                                        <option value="seminario">Seminário</option>
+                                        <option value="minicurso">Minicurso</option>
+                                        <option value="oficina">Oficina</option>
+                                        <option value="outro">Outro</option>
+                                    </select>
+                                    <div class="form-text">Escolha o tipo para carregar automaticamente carga horária e conteúdo padrão</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nomeEvento" class="form-label required">Nome do Evento/Curso</label>
+                                    <input type="text" 
+                                           id="nomeEvento" 
+                                           name="nomeEvento" 
+                                           class="form-control" 
+                                           placeholder="Ex: Workshop Primeiros Socorros para Todos"
+                                           required>
+                                    <div class="form-text">Nome que aparecerá destacado no certificado</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descricaoEvento" class="form-label">Descrição/Objetivo</label>
+                                    <textarea id="descricaoEvento" 
+                                              name="descricaoEvento" 
+                                              class="form-control" 
+                                              rows="3"
+                                              placeholder="Breve descrição dos objetivos e finalidade do evento..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Data e Local -->
+                            <div class="mb-4">
+                                <h5 class="text-primary mb-3">Data e Local</h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dataInicioEvento" class="form-label required">Data de Início</label>
+                                            <input type="date" 
+                                                   id="dataInicioEvento" 
+                                                   name="dataInicioEvento" 
+                                                   class="form-control" 
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dataFimEvento" class="form-label">Data de Término</label>
+                                            <input type="date" 
+                                                   id="dataFimEvento" 
+                                                   name="dataFimEvento" 
+                                                   class="form-control">
+                                            <div class="form-text">Deixe em branco se for evento de um dia</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="horaInicioEvento" class="form-label">Horário de Início</label>
+                                            <input type="time" 
+                                                   id="horaInicioEvento" 
+                                                   name="horaInicioEvento" 
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="horaFimEvento" class="form-label">Horário de Término</label>
+                                            <input type="time" 
+                                                   id="horaFimEvento" 
+                                                   name="horaFimEvento" 
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="cargaHorariaEvento" class="form-label required">Carga Horária (horas)</label>
+                                            <input type="number" 
+                                                   id="cargaHorariaEvento" 
+                                                   name="cargaHorariaEvento" 
+                                                   class="form-control" 
+                                                   min="1" 
+                                                   max="999"
+                                                   placeholder="4"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="localEvento" class="form-label required">Local de Realização</label>
+                                    <input type="text" 
+                                           id="localEvento" 
+                                           name="localEvento" 
+                                           class="form-control" 
+                                           placeholder="Ex: APAE Cachoeirinha, Auditório Principal"
+                                           required>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="enderecoEvento" class="form-label">Endereço do Local</label>
+                                            <input type="text" 
+                                                   id="enderecoEvento" 
+                                                   name="enderecoEvento" 
+                                                   class="form-control" 
+                                                   placeholder="Rua das Flores, 123 - Centro">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="cnpjLocalEvento" class="form-label">CNPJ do Local</label>
+                                            <input type="text" 
+                                                   id="cnpjLocalEvento" 
+                                                   name="cnpjLocalEvento" 
+                                                   class="form-control" 
+                                                   placeholder="00.000.000/0001-00"
+                                                   data-mask="cnpj"
+                                                   data-validate="cnpj">
+                                            <div class="form-text">Se aplicável</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Conteúdo Programático -->
+                            <div class="mb-4">
+                                <h5 class="text-primary mb-3">Conteúdo Programático</h5>
+                                
+                                <div class="form-group">
+                                    <label for="modalidadeEvento" class="form-label required">Modalidade</label>
+                                    <select id="modalidadeEvento" name="modalidadeEvento" class="form-control form-select" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="presencial">Presencial</option>
+                                        <option value="online">Online</option>
+                                        <option value="hibrido">Híbrido</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Tópicos do Conteúdo Programático</label>
+                                    <div id="topicosContainer">
+                                        <div class="input-group mb-2">
+                                            <input type="text" 
+                                                   class="form-control topico-input" 
+                                                   placeholder="Ex: Conceitos e fundamentos de Primeiros Socorros">
+                                            <button type="button" class="btn btn-outline-danger remove-topico">✕</button>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="addTopico" class="btn btn-outline-primary btn-sm">
+                                        + Adicionar Tópico
+                                    </button>
+                                    <button type="button" id="carregarPadrao" class="btn btn-outline-success btn-sm ms-2">
+                                        📋 Carregar Conteúdo Padrão
+                                    </button>
+                                    <div class="form-text">Adicione os principais tópicos ou use o conteúdo padrão baseado no tipo de evento</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="publicoAlvoEvento" class="form-label">Público-Alvo</label>
+                                            <input type="text" 
+                                                   id="publicoAlvoEvento" 
+                                                   name="publicoAlvoEvento" 
+                                                   class="form-control" 
+                                                   placeholder="Ex: Profissionais da saúde, Comunidade em geral">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nivelEvento" class="form-label">Nível</label>
+                                            <select id="nivelEvento" name="nivelEvento" class="form-control form-select">
+                                                <option value="">Selecione...</option>
+                                                <option value="basico">Básico</option>
+                                                <option value="intermediario">Intermediário</option>
+                                                <option value="avancado">Avançado</option>
+                                                <option value="livre">Livre</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Certificação -->
+                            <div class="mb-4">
+                                <h5 class="text-primary mb-3">Informações da Certificação</h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="numeroBaseEvento" class="form-label required">Número Base dos Certificados</label>
+                                            <input type="text" 
+                                                   id="numeroBaseEvento" 
+                                                   name="numeroBaseEvento" 
+                                                   class="form-control" 
+                                                   placeholder="Ex: 150425"
+                                                   required>
+                                            <div class="form-text">Número base que será incrementado para cada participante</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="validadeEvento" class="form-label">Validade (anos)</label>
+                                            <select id="validadeEvento" name="validadeEvento" class="form-control form-select">
+                                                <option value="">Sem validade específica</option>
+                                                <option value="1">1 ano</option>
+                                                <option value="2">2 anos</option>
+                                                <option value="3">3 anos</option>
+                                                <option value="5">5 anos</option>
+                                                <option value="10">10 anos</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="observacoesEvento" class="form-label">Observações Adicionais</label>
+                                    <textarea id="observacoesEvento" 
+                                              name="observacoesEvento" 
+                                              class="form-control" 
+                                              rows="2"
+                                              placeholder="Informações adicionais que devem constar no certificado..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Ações -->
+                            <div class="d-flex justify-content-between">
+                                <a href="../index.html" class="btn btn-outline-secondary">
+                                    ← Voltar ao Início
+                                </a>
+                                <div>
+                                    <button type="button" id="salvarRascunhoEvento" class="btn btn-outline-primary me-2">
+                                        Salvar Rascunho
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        Próximo Passo →
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar com Preview -->
+            <div class="col-md-4">
+                <!-- Calculadora de Carga Horária -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title">🕐 Calculadora de Carga Horária</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Horário de Início</label>
+                            <input type="time" id="calcInicio" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Horário de Término</label>
+                            <input type="time" id="calcFim" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Intervalo (minutos)</label>
+                            <input type="number" id="calcIntervalo" class="form-control form-control-sm" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Número de Dias</label>
+                            <input type="number" id="calcDias" class="form-control form-control-sm" value="1" min="1">
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>Total: <span id="totalHoras">0</span> horas</strong>
+                        </div>
+                        <button type="button" id="aplicarCalculo" class="btn btn-primary btn-sm btn-block">
+                            Aplicar ao Formulário
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview do Evento -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">📋 Preview do Evento</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="previewEvento">
+                            <p class="text-muted text-sm">
+                                Preencha o formulário para ver o preview do evento
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dicas -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="card-title">💡 Dicas</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6 class="text-primary">Nome do Evento</h6>
+                            <p class="text-sm">
+                                Use um nome claro e descritivo que identifique facilmente o evento.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="text-primary">Carga Horária</h6>
+                            <p class="text-sm">
+                                Use a calculadora ao lado para determinar a carga horária exata.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="text-primary">Conteúdo</h6>
+                            <p class="text-sm">
+                                Liste os principais tópicos de forma organizada e clara.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="modalConfirmacaoEvento" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Evento Configurado com Sucesso!</h5>
+                    <button type="button" class="btn-close" data-modal-close="modalConfirmacaoEvento"></button>
+                </div>
+                <div class="modal-body">
+                    <p>As informações do evento foram salvas com sucesso.</p>
+                    <p>Agora você pode escolher um template para seus certificados.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-modal-close="modalConfirmacaoEvento">
+                        Continuar Editando
+                    </button>
+                    <a href="templates.html" class="btn btn-primary">
+                        Escolher Template
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/components.js"></script>
+    <script src="../assets/js/grave-data.js"></script>
+    <script>
+        $(document).ready(function() {
+            'use strict';
+            
+            // Carregar dados salvos do evento
+            function carregarDadosEvento() {
+                const evento = GRAVE.Storage.get('evento');
+                if (evento) {
+                    Object.keys(evento).forEach(key => {
+                        const $field = $(`#${key}`);
+                        if ($field.length && evento[key]) {
+                            $field.val(evento[key]);
+                        }
+                    });
+                    
+                    // Carregar tópicos se existirem
+                    if (evento.topicos && evento.topicos.length > 0) {
+                        $('#topicosContainer').empty();
+                        evento.topicos.forEach(topico => {
+                            adicionarTopico(topico);
+                        });
+                    }
+                    
+                    atualizarPreviewEvento();
+                    GRAVE.Notification.info('Dados do evento carregados');
+                }
+            }
+            
+            // Adicionar tópico ao conteúdo programático
+            function adicionarTopico(valor = '') {
+                const topico = $(`
+                    <div class="input-group mb-2">
+                        <input type="text" 
+                               class="form-control topico-input" 
+                               placeholder="Ex: Conceitos e fundamentos de Primeiros Socorros"
+                               value="${valor}">
+                        <button type="button" class="btn btn-outline-danger remove-topico">✕</button>
+                    </div>
+                `);
+                $('#topicosContainer').append(topico);
+            }
+            
+            // Event listener para adicionar tópico
+            $('#addTopico').on('click', function() {
+                adicionarTopico();
+            });
+            
+            // Event listener para tipo de evento (carregar dados padrão)
+            $('#tipoEvento').on('change', function() {
+                const tipoSelecionado = $(this).val();
+                const dadosTipo = getTipoEvento(tipoSelecionado);
+                
+                if (dadosTipo) {
+                    // Sugerir carga horária padrão
+                    if (!$('#cargaHorariaEvento').val()) {
+                        $('#cargaHorariaEvento').val(dadosTipo.cargaHorariaPadrao);
+                    }
+                    
+                    GRAVE.Notification.info(`Tipo "${dadosTipo.nome}" selecionado. Use o botão "Carregar Conteúdo Padrão" para adicionar os tópicos.`);
+                } else {
+                    GRAVE.Notification.info('Tipo personalizado selecionado. Adicione manualmente os tópicos e carga horária.');
+                }
+                
+                atualizarPreviewEvento();
+            });
+            
+            // Carregar conteúdo padrão baseado no tipo de evento
+            $('#carregarPadrao').on('click', function() {
+                const tipoSelecionado = $('#tipoEvento').val();
+                
+                if (!tipoSelecionado) {
+                    GRAVE.Notification.warning('Selecione primeiro o tipo de evento');
+                    return;
+                }
+                
+                const dadosTipo = getTipoEvento(tipoSelecionado);
+                if (!dadosTipo) {
+                    GRAVE.Notification.warning('Tipo de evento não possui conteúdo padrão');
+                    return;
+                }
+                
+                const conteudoPadrao = getConteudoPadrao(dadosTipo.conteudoPadrao);
+                
+                if (conteudoPadrao && conteudoPadrao.length > 0) {
+                    // Limpar tópicos existentes
+                    $('#topicosContainer').empty();
+                    
+                    // Adicionar conteúdo padrão
+                    conteudoPadrao.forEach(topico => {
+                        adicionarTopico(topico);
+                    });
+                    
+                    // Definir carga horária padrão se não definida
+                    if (!$('#cargaHorariaEvento').val()) {
+                        $('#cargaHorariaEvento').val(dadosTipo.cargaHorariaPadrao);
+                    }
+                    
+                    GRAVE.Notification.success(`Conteúdo padrão de ${dadosTipo.nome} carregado com ${conteudoPadrao.length} tópicos!`);
+                    atualizarPreviewEvento();
+                } else {
+                    GRAVE.Notification.warning('Conteúdo padrão não disponível para este tipo');
+                }
+            });
+            
+            // Event listener para remover tópico
+            $(document).on('click', '.remove-topico', function() {
+                if ($('#topicosContainer .input-group').length > 1) {
+                    $(this).closest('.input-group').remove();
+                } else {
+                    GRAVE.Notification.warning('Deve haver pelo menos um tópico');
+                }
+            });
+            
+            // Calculadora de carga horária
+            function calcularHoras() {
+                const inicio = $('#calcInicio').val();
+                const fim = $('#calcFim').val();
+                const intervalo = parseInt($('#calcIntervalo').val() || 0);
+                const dias = parseInt($('#calcDias').val() || 1);
+                
+                if (inicio && fim) {
+                    const [horaInicio, minInicio] = inicio.split(':').map(Number);
+                    const [horaFim, minFim] = fim.split(':').map(Number);
+                    
+                    const inicioMinutos = horaInicio * 60 + minInicio;
+                    const fimMinutos = horaFim * 60 + minFim;
+                    
+                    let totalMinutos = fimMinutos - inicioMinutos;
+                    if (totalMinutos < 0) totalMinutos += 24 * 60; // Próximo dia
+                    
+                    totalMinutos -= intervalo; // Subtrair intervalo
+                    totalMinutos *= dias; // Multiplicar por dias
+                    
+                    const horas = Math.floor(totalMinutos / 60);
+                    const minutos = totalMinutos % 60;
+                    
+                    const totalHoras = minutos > 0 ? `${horas}h${minutos}min` : `${horas}h`;
+                    $('#totalHoras').text(totalHoras);
+                    
+                    return horas + (minutos / 60);
+                }
+                
+                $('#totalHoras').text('0h');
+                return 0;
+            }
+            
+            // Event listeners para calculadora
+            $('#calcInicio, #calcFim, #calcIntervalo, #calcDias').on('change input', calcularHoras);
+            
+            // Aplicar cálculo ao formulário
+            $('#aplicarCalculo').on('click', function() {
+                const horas = Math.ceil(calcularHoras());
+                if (horas > 0) {
+                    $('#cargaHorariaEvento').val(horas);
+                    GRAVE.Notification.success('Carga horária aplicada!');
+                    atualizarPreviewEvento();
+                } else {
+                    GRAVE.Notification.warning('Configure primeiro os horários na calculadora');
+                }
+            });
+            
+            // Atualizar preview do evento
+            function atualizarPreviewEvento() {
+                const dados = GRAVE.Form.serialize('#eventoForm');
+                
+                // Coletar tópicos
+                const topicos = [];
+                $('.topico-input').each(function() {
+                    const valor = $(this).val().trim();
+                    if (valor) topicos.push(valor);
+                });
+                dados.topicos = topicos;
+                
+                if (Object.keys(dados).length > 1) {
+                    let html = '<div class="text-sm">';
+                    
+                    if (dados.tipoEvento && dados.nomeEvento) {
+                        html += `<p><strong>${dados.tipoEvento.toUpperCase()}:</strong><br>${dados.nomeEvento}</p>`;
+                    }
+                    
+                    if (dados.dataInicioEvento) {
+                        let periodo = GRAVE.Format.date(dados.dataInicioEvento);
+                        if (dados.dataFimEvento && dados.dataFimEvento !== dados.dataInicioEvento) {
+                            periodo += ` a ${GRAVE.Format.date(dados.dataFimEvento)}`;
+                        }
+                        html += `<p><strong>Data:</strong><br>${periodo}</p>`;
+                    }
+                    
+                    if (dados.localEvento) {
+                        html += `<p><strong>Local:</strong><br>${dados.localEvento}</p>`;
+                    }
+                    
+                    if (dados.cargaHorariaEvento) {
+                        html += `<p><strong>Carga Horária:</strong><br>${dados.cargaHorariaEvento} horas</p>`;
+                    }
+                    
+                    if (dados.modalidadeEvento) {
+                        html += `<p><strong>Modalidade:</strong><br>${dados.modalidadeEvento}</p>`;
+                    }
+                    
+                    if (topicos.length > 0) {
+                        html += `<p><strong>Tópicos:</strong></p><ul class="text-sm">`;
+                        topicos.forEach(topico => {
+                            html += `<li>${topico}</li>`;
+                        });
+                        html += '</ul>';
+                    }
+                    
+                    html += '</div>';
+                    $('#previewEvento').html(html);
+                } else {
+                    $('#previewEvento').html('<p class="text-muted text-sm">Preencha o formulário para ver o preview</p>');
+                }
+            }
+            
+            // Salvar rascunho
+            $('#salvarRascunhoEvento').on('click', function() {
+                const dados = GRAVE.Form.serialize('#eventoForm');
+                
+                // Coletar tópicos
+                const topicos = [];
+                $('.topico-input').each(function() {
+                    const valor = $(this).val().trim();
+                    if (valor) topicos.push(valor);
+                });
+                dados.topicos = topicos;
+                
+                GRAVE.Storage.set('evento', dados);
+                atualizarPreviewEvento();
+                GRAVE.Notification.success('Rascunho do evento salvo!');
+            });
+            
+            // Submissão do formulário
+            $('#eventoForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                if (!GRAVE.Form.validate(this)) {
+                    return;
+                }
+                
+                const dados = GRAVE.Form.serialize(this);
+                
+                // Coletar tópicos
+                const topicos = [];
+                $('.topico-input').each(function() {
+                    const valor = $(this).val().trim();
+                    if (valor) topicos.push(valor);
+                });
+                
+                if (topicos.length === 0) {
+                    GRAVE.Notification.error('Adicione pelo menos um tópico ao conteúdo programático');
+                    return;
+                }
+                
+                dados.topicos = topicos;
+                
+                GRAVE.Storage.set('evento', dados);
+                GRAVE.Modal.show('modalConfirmacaoEvento');
+            });
+            
+            // Atualizar preview em tempo real
+            $('#eventoForm').on('input change', function() {
+                setTimeout(atualizarPreviewEvento, 100);
+            });
+            
+            // Inicialização
+            carregarDadosEvento();
+            calcularHoras();
+        });
+    </script>
+</body>
+</html>
